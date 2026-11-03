@@ -1,0 +1,14 @@
+{
+  "project":"gaussian-splat-studio",
+  "date":"2026-11-03",
+  "release":"0.1.0",
+  "state":"starter implemented; runtime verification blocked",
+  "completed":["Primary-source technology review","Modular viewer source and scene validation","Project import/inspection/checkpoint CLI","13 offline tests passing","Deployment workflow source","User documentation","Local Git commits"],
+  "pending":["Install dependencies and generate reviewed package-lock.json","Full TypeScript typecheck and Vite production build","Download and test explicitly licensed sample","Verify actual 3D rendering and browser interactions","Real Pixel 7 capture and performance test","Approve and create private GitHub repository","Connect hosting and protected external asset storage","Enable protected automatic previews","Approve and verify production deployment","Verify rollback"],
+  "decisions":["Keep PlayCanvas, Vite, TypeScript and SOG","Netlify deployment adapter","CPU conversion default for Apple Silicon portability","Do not silently crop, decimate or remove visible objects","Never auto-publish on ordinary main commits"],
+  "knownIssues":["Shell network resolution blocked: npm ENOTFOUND","Local HTTP binding denied: EPERM","Browser blocks file URLs; no browser QA performed","Toy Cat asset-specific licence unresolved; explicitly CC BY 4.0 Japanese Bee identified as replacement","Direct dependency pins not registry-resolved; no lockfile","Hosted preview and external manifest backend are documented, not provisioned"],
+  "nextAction":"On the Mac, run npm install, npm test, npm run build and npm run dev; provide the Local URL/build output for browser verification. Separately approve the GitHub owner/private repository creation.",
+  "publishingApproval":null,
+  "githubRepository":null,
+  "deploymentUrl":null
+}

@@ -1,8 +1,108 @@
 {
-  "version":1,"id":"toy-cat","title":"A different perspective.","subtitle":"Explore a small object in extraordinary detail. A sample scene for your next spatial experience.",
-  "asset":{"url":"https://developer.playcanvas.com/assets/toy-cat.sog","rotation":[0,0,180],"position":[0,-0.7,0],"credit":"Toy Cat · PlayCanvas documentation sample","licence":"PlayCanvas developer-site repository: MIT; see THIRD_PARTY.md","source":"https://developer.playcanvas.com/user-manual/gaussian-splatting/building/your-first-app/engine/"},
-  "camera":{"position":[0,0.15,2.5],"target":[0,0,0]},
-  "theme":{"brand":"SPLAT / STUDIO","accent":"#c8eea0","background":"#171a19","font":"Inter, system-ui, sans-serif","navigation":"bottom"},
-  "hotspots":[{"label":"Captured, not modelled","text":"This is a Gaussian splat: a scene represented by coloured, translucent ellipsoids rather than a conventional polygon mesh.","position":[0,0.15,0],"camera":{"position":[1.4,0.4,1.8],"target":[0,0,0]}}],
-  "tour":[{"label":"Front view","position":[0,0.15,2.5],"target":[0,0,0],"duration":4},{"label":"A closer look","position":[1.5,0.4,1.5],"target":[0,0,0],"duration":5},{"label":"The other side","position":[-1.8,0.3,0.8],"target":[0,0,0],"duration":5}]
+  "version": 1,
+  "id": "toy-cat",
+  "title": "A different perspective.",
+  "subtitle": "Explore a small object in extraordinary detail. A sample scene for your next spatial experience.",
+  "asset": {
+    "url": "https://developer.playcanvas.com/assets/toy-cat.sog",
+    "rotation": [
+      0,
+      0,
+      180
+    ],
+    "position": [
+      0,
+      -0.7,
+      0
+    ],
+    "credit": "Toy Cat · PlayCanvas documentation sample",
+    "licence": "Development reference only: asset-specific licence not confirmed. See THIRD_PARTY.md before publication.",
+    "source": "https://developer.playcanvas.com/user-manual/gaussian-splatting/building/your-first-app/engine/"
+  },
+  "camera": {
+    "position": [
+      0,
+      0.15,
+      2.5
+    ],
+    "target": [
+      0,
+      0,
+      0
+    ]
+  },
+  "theme": {
+    "brand": "SPLAT / STUDIO",
+    "accent": "#c8eea0",
+    "background": "#171a19",
+    "font": "Inter, system-ui, sans-serif",
+    "navigation": "bottom"
+  },
+  "hotspots": [
+    {
+      "label": "Captured, not modelled",
+      "text": "This is a Gaussian splat: a scene represented by coloured, translucent ellipsoids rather than a conventional polygon mesh.",
+      "position": [
+        0,
+        0.15,
+        0
+      ],
+      "camera": {
+        "position": [
+          1.4,
+          0.4,
+          1.8
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  ],
+  "tour": [
+    {
+      "label": "Front view",
+      "position": [
+        0,
+        0.15,
+        2.5
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ],
+      "duration": 4
+    },
+    {
+      "label": "A closer look",
+      "position": [
+        1.5,
+        0.4,
+        1.5
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ],
+      "duration": 5
+    },
+    {
+      "label": "The other side",
+      "position": [
+        -1.8,
+        0.3,
+        0.8
+      ],
+      "target": [
+        0,
+        0,
+        0
+      ],
+      "duration": 5
+    }
+  ]
 }

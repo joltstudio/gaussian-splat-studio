@@ -49,10 +49,15 @@ export class Viewer {
       while(true){const{done,value}=await reader.read();if(done)break;bytes+=value.byteLength;if(bytes>512*1024*1024){await reader.cancel();throw new Error('Scene exceeds 512 MB.');}chunks.push(value as Uint8Array<ArrayBuffer>);this.progress(total?Math.min(bytes/total,.99):null,`Downloading · ${(bytes/1048576).toFixed(1)} MB${total?' / '+(total/1048576).toFixed(1)+' MB':''}`);}
       this.progress(null,'Decoding scene and preparing graphics…');this.blob=URL.createObjectURL(new Blob(chunks));
       const filename=name.split('?')[0].split('/').pop()||'scene.sog';const asset=new pc.Asset('Scene','gsplat',{url:this.blob,filename});this.asset=asset;this.app.assets.add(asset);
-      await new Promise<void>((resolve,reject)=>{const timer=setTimeout(()=>reject(new Error('Scene decoding timed out. Try a smaller SOG export.')),120000);asset.once('load',()=>{clearTimeout(timer);resolve();});asset.once('error',(e:unknown)=>{clearTimeout(timer);reject(new Error(String(e)));});this.app.assets.load(asset);});
+      await new Promise<void>((resolve,reject)=>{
+        const finish=(error?:Error)=>{clearTimeout(timer);asset.off('load',loaded);asset.off('error',failed);abort.signal.removeEventListener('abort',cancelled);error?reject(error):resolve();};
+        const loaded=()=>finish();const failed=(e:unknown)=>finish(new Error(String(e)));const cancelled=()=>finish(new Error('Load cancelled'));
+        const timer=setTimeout(()=>finish(new Error('Scene decoding timed out. Try a smaller SOG export.')),120000);
+        asset.once('load',loaded);asset.once('error',failed);abort.signal.addEventListener('abort',cancelled,{once:true});this.app.assets.load(asset);
+      });
       if(abort.signal.aborted)return;const entity=new pc.Entity('Splat');entity.setPosition(...this.config.asset.position);entity.setEulerAngles(...this.config.asset.rotation);entity.addComponent('gsplat',{asset});this.app.root.addChild(entity);this.entity=entity;this.ready=true;this.progress(1,'Ready');
     }catch(error){if(abort.signal.aborted)return;throw error;}
   }
-  screen(point:Point){const p=this.camera.camera!.worldToScreen(new pc.Vec3(...point));return{x:p.x/devicePixelRatio,y:p.y/devicePixelRatio,z:p.z};}
+  screen(point:Point){const world=new pc.Vec3(...point);const p=this.camera.camera!.worldToScreen(world);const view=this.camera.camera!.viewMatrix.transformPoint(world);return{x:p.x,y:p.y,behind:view.z>=0};}
   destroy(){this.abort?.abort();this.cleanup.forEach(f=>f());this.app.destroy();if(this.blob)URL.revokeObjectURL(this.blob);}
 }
