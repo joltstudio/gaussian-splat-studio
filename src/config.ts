@@ -36,7 +36,7 @@ export function validateScene(v: unknown): Scene {
   return v as Scene;
 }
 export async function loadScene(): Promise<Scene> {
-  const id = new URLSearchParams(location.search).get('project') || 'toy-cat';
+  const id = new URLSearchParams(location.search).get('project') || 'measuring-tape';
   if(!/^[a-z0-9-]+$/.test(id)) throw new Error('Invalid project name.');
   const base = (import.meta as ImportMeta & {env?: Record<string,string>}).env?.VITE_PROJECT_BASE || '/projects';
   const response = await fetch(`${base}/${id}.json`, {cache:'no-cache', signal:AbortSignal.timeout(15000)});
