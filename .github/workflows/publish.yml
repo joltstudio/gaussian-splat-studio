@@ -1,0 +1,33 @@
+name: Publish approved release
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: 'Type PUBLISH after reviewing this exact commit and all public assets'
+        required: true
+      approved_sha:
+        description: 'Full commit SHA you reviewed'
+        required: true
+permissions:
+  contents: read
+concurrency:
+  group: production
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/main' && inputs.confirmation == 'PUBLISH' && inputs.approved_sha == github.sha && github.actor == vars.PUBLISHER_LOGIN
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - name: Deploy approved build through Netlify API
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          APPROVED_SHA: ${{ inputs.approved_sha }}
+        run: node scripts/deploy.mjs
