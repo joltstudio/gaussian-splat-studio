@@ -1,15 +1,22 @@
-import test from 'node:test';import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';import {inspectHeader} from '../scripts/inspect.mjs';import {validateScene} from '../src/config.ts';
-const sample=JSON.parse(await readFile(new URL('../public/projects/toy-cat.json',import.meta.url),'utf8'));
-test('sample configuration validates',()=>assert.equal(validateScene(sample).id,'toy-cat'));
-test('unsafe asset URL rejected',()=>{const c=structuredClone(sample);c.asset.url='javascript:alert(1).sog';assert.throws(()=>validateScene(c),/HTTP/);});
-test('path traversal project rejected',()=>{const c=structuredClone(sample);c.id='../secret';assert.throws(()=>validateScene(c),/invalid id/);});
-test('zero camera vector rejected',()=>{const c=structuredClone(sample);c.camera.position=c.camera.target;assert.throws(()=>validateScene(c),/cannot equal/);});
-test('non-finite transform rejected',()=>{const c=structuredClone(sample);c.asset.position[0]=Infinity;assert.throws(()=>validateScene(c),/finite/);});
-test('mesh PLY rejected',()=>assert.throws(()=>inspectHeader(Buffer.from('ply\nformat ascii 1.0\nelement vertex 1\nproperty float x\nend_header\n0'),100,'.ply'),/not a recognised/));
-const props=['x','y','z','opacity','scale_0','scale_1','scale_2','rot_0','rot_1','rot_2','rot_3','f_dc_0','f_dc_1','f_dc_2'];const header=Buffer.from('ply\nformat binary_little_endian 1.0\nelement vertex 1\n'+props.map(p=>'property float '+p+'\n').join('')+'end_header\n');
-test('valid Gaussian header and payload accepted',()=>assert.equal(inspectHeader(Buffer.concat([header,Buffer.alloc(56)]),header.length+56,'.ply').vertices,1));
-test('truncated payload rejected',()=>assert.throws(()=>inspectHeader(header,header.length,'.ply'),/truncated/));
-test('renamed random file is not SOG',()=>assert.throws(()=>inspectHeader(Buffer.from('not zip'),7,'.sog'),/ZIP/));
-test('SOG signature result explicitly limited',()=>{const r=inspectHeader(Buffer.from([0x50,0x4b,3,4]),4,'.sog');assert.equal(r.format,'sog-container');assert.match(r.warnings[0],/signature only/);});
-test('invalid tour duration rejected',()=>{const c=structuredClone(sample);c.tour[0].duration=-1;assert.throws(()=>validateScene(c),/duration/);});
-test('invalid mobile variant rejected',()=>{const c=structuredClone(sample);c.asset.lowUrl='x.exe';assert.throws(()=>validateScene(c),/lowUrl/);});
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import { inspectHeader } from '../scripts/inspect.mjs';
+import { validateScene } from '../src/config.ts';
+
+const sample = JSON.parse(await readFile(new URL('../public/projects/measuring-tape.json', import.meta.url), 'utf8'));
+
+test('default licensed sample configuration validates', () => assert.equal(validateScene(sample).id, 'measuring-tape'));
+test('unsafe asset URL rejected', () => { const c = structuredClone(sample); c.asset.url = 'javascript:alert(1).sog'; assert.throws(() => validateScene(c), /HTTP/); });
+test('path traversal project rejected', () => { const c = structuredClone(sample); c.id = '../secret'; assert.throws(() => validateScene(c), /invalid id/); });
+test('zero camera vector rejected', () => { const c = structuredClone(sample); c.camera.position = c.camera.target; assert.throws(() => validateScene(c), /cannot equal/); });
+test('non-finite transform rejected', () => { const c = structuredClone(sample); c.asset.position[0] = Infinity; assert.throws(() => validateScene(c), /finite/); });
+test('mesh PLY rejected', () => assert.throws(() => inspectHeader(Buffer.from('ply\nformat ascii 1.0\nelement vertex 1\nproperty float x\nend_header\n0'), 100, '.ply'), /not a recognised/));
+const props = ['x', 'y', 'z', 'opacity', 'scale_0', 'scale_1', 'scale_2', 'rot_0', 'rot_1', 'rot_2', 'rot_3', 'f_dc_0', 'f_dc_1', 'f_dc_2'];
+const header = Buffer.from('ply\nformat binary_little_endian 1.0\nelement vertex 1\n' + props.map(p => 'property float ' + p + '\n').join('') + 'end_header\n');
+test('valid Gaussian header and payload accepted', () => assert.equal(inspectHeader(Buffer.concat([header, Buffer.alloc(56)]), header.length + 56, '.ply').vertices, 1));
+test('truncated payload rejected', () => assert.throws(() => inspectHeader(header, header.length, '.ply'), /truncated/));
+test('renamed random file is not SOG', () => assert.throws(() => inspectHeader(Buffer.from('not zip'), 7, '.sog'), /ZIP/));
+test('SOG signature result explicitly limited', () => { const r = inspectHeader(Buffer.from([0x50, 0x4b, 3, 4]), 4, '.sog'); assert.equal(r.format, 'sog-container'); assert.match(r.warnings[0], /signature only/); });
+test('invalid tour duration rejected', () => { const c = structuredClone(sample); c.tour = [{ label: 'Invalid', position: [0, 0, 1], target: [0, 0, 0], duration: -1 }]; assert.throws(() => validateScene(c), /duration/); });
+test('invalid mobile variant rejected', () => { const c = structuredClone(sample); c.asset.lowUrl = 'x.exe'; assert.throws(() => validateScene(c), /lowUrl/); });
