@@ -1,6 +1,6 @@
 # Verification and maintenance
 
-## Results from 3 November 2026
+## Initial results from 3 November 2026 (superseded where noted below)
 
 - 13 offline Node tests passed: configuration, camera vector/duration validation, URL safety, PLY classification, payload truncation and SOG container checks.
 - TypeScript source parsed/transformed using Node's built-in TypeScript support; standalone generated JavaScript syntax checked.
@@ -30,3 +30,11 @@ Do not substitute a successful unit test or compilation for visual verification.
 ## Update dependencies
 
 Work on a branch. Read upstream release notes; update one dependency at a time; retain pinned versions and commit the resulting lock. Run tests/build and repeat affected browser/device checks. Recheck SOG format/decoder compatibility after engine or converter upgrades. Keep a tagged known-working release and old immutable assets. Run `npm audit` after registry access is available; no security audit was possible in this session.
+
+## Follow-up verification, 3 November 2026
+
+The user successfully installed dependencies: 49 packages, npm reported zero vulnerabilities at that time. All 13 tests passed and the full TypeScript/Vite build succeeded. The agent repeated tests/build successfully after fixing tour-label DOM churn. The final portrait framing change also passes the production build.
+
+The running Vite preview at http://127.0.0.1:5173 was inspected in the in-app browser. Toy Cat visibly rendered. Clicking its hotspot opened the information panel and changed the view. Tour activation failed initially; updating its DOM only when state changes fixed this, and the Stop tour/pressed state was then verified. Reset, zoom-in and Eco controls were exercised. Desktop 1280x800 and portrait 390x844 views were visually inspected; portrait horizontal FOV fixed clipping. Temporary viewport overrides were reset. The live counter displayed around 58–60 FPS during these brief checks, not a controlled benchmark.
+
+Still unverified: actual Pixel 7 hardware/touch/performance, full keyboard and fullscreen paths, error recovery, production-output browser run, SOG conversion, licensed alternative asset, hosting and rollback.

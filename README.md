@@ -2,7 +2,7 @@
 
 A reusable PlayCanvas + Vite + TypeScript starter, plus a local project workflow for Scaniverse → SuperSplat → SOG → web.
 
-**Status: implemented starter, not yet browser-verified.** This environment blocked npm network access and local HTTP server startup. Rendering, production build, SOG conversion and deployment remain unverified. See `PROJECT_STATUS.json`. Nothing has been published; no GitHub repository has been created.
+**Status: local prototype renders.** Dependencies are installed, 13 tests and the production build pass. Browser checks confirmed sample rendering, hotspot information and tour activation; desktop and portrait layouts were inspected. SOG conversion, real-device testing and deployment remain unverified. See `PROJECT_STATUS.json`. Nothing has been published; no GitHub repository has been created.
 
 ## Start on your Mac
 
@@ -17,7 +17,7 @@ npm run dev
 
 Open the Local URL Vite prints. The sample configuration references PlayCanvas's public Toy Cat SOG. The engine is bundled by Vite; the sample itself requires an internet connection. See `THIRD_PARTY.md` for the sample licence limitation and the explicitly CC BY 4.0 alternative identified for release testing.
 
-The first successful installation creates `package-lock.json`. Review and commit it. Subsequent installs and CI use `npm ci`. Direct dependencies are pinned; a verified transitive lock could not be generated in the restricted environment. CI deliberately fails until that lock is present. Dependency versions must be confirmed by a successful registry installation, not assumed from search snippets.
+A package-lock.json is now included after successful installation on the Mac. Use npm ci for subsequent reproducible installations. CI uses the same lock.
 
 Optional dependency-free preview: `npm run preview:portable`. This uses a pinned PlayCanvas CDN module and still needs network access and permission to bind localhost. `node scripts/standalone.mjs` creates `.portable/studio-preview.html` for manual local browser review, also needing CDN access. Neither fallback replaces Vite build verification.
 

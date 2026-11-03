@@ -10,7 +10,7 @@ export class Viewer {
     this.camera=new pc.Entity('Camera');this.camera.addComponent('camera',{clearColor:new pc.Color().fromString(config.theme.background),nearClip:0.01,farClip:1000,fov:50});this.app.root.addChild(this.camera);
     this.low=matchMedia('(pointer: coarse)').matches;this.quality(this.low);this.setView(config.camera);
     this.app.setCanvasFillMode(pc.FILLMODE_NONE);this.app.setCanvasResolution(pc.RESOLUTION_AUTO);
-    const resize=()=>this.app.resizeCanvas(canvas.clientWidth,canvas.clientHeight);window.addEventListener('resize',resize);this.cleanup.push(()=>window.removeEventListener('resize',resize));resize();
+    const resize=()=>{this.camera.camera!.horizontalFov=window.innerWidth<window.innerHeight;this.app.resizeCanvas(window.innerWidth,window.innerHeight);};window.addEventListener('resize',resize);this.cleanup.push(()=>window.removeEventListener('resize',resize));resize();
     const on=<K extends keyof HTMLElementEventMap>(name:K,fn:(e:HTMLElementEventMap[K])=>void,options?:AddEventListenerOptions)=>{canvas.addEventListener(name,fn,options);this.cleanup.push(()=>canvas.removeEventListener(name,fn));};
     on('contextmenu',e=>e.preventDefault());
     on('pointerdown',e=>{this.stopTour();canvas.focus();canvas.setPointerCapture(e.pointerId);this.points.set(e.pointerId,{x:e.clientX,y:e.clientY});});

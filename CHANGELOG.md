@@ -9,3 +9,10 @@
 - Added offline tests, Mac setup/capture/edit/customisation/testing/deployment documentation and status tracking.
 - Added GitHub checks and explicit exact-commit production release workflow for Netlify.
 - Pending: dependency install/lock/typecheck/build, browser rendering, licensed-sample download, mobile tests, account setup, hosted previews, deployment and rollback verification.
+
+### Local verification follow-up
+
+- Installed and locked dependencies; TypeScript and Vite build passed.
+- Verified actual sample rendering and basic controls in the browser.
+- Fixed tour-button clicks interrupted by per-frame label replacement.
+- Fixed full-viewport sizing and portrait camera framing.
