@@ -2,46 +2,43 @@
   "project": "gaussian-splat-studio",
   "date": "2026-11-03",
   "release": "0.1.0",
-  "state": "Local prototype renders; deployment and real-device verification pending",
+  "state": "Private GitHub repository updated with MIT source and a CC0 demo; public release and production deployment pending",
   "completed": [
     "Primary-source technology review",
     "Modular viewer source and scene validation",
-    "Project import/inspection/checkpoint CLI",
-    "13 offline tests passing",
-    "Deployment workflow source",
+    "Project import, inspection and checkpoint CLI",
+    "13 offline tests and TypeScript/Vite production build passed before release updates",
+    "Manual-only production publishing workflow",
     "User documentation",
-    "Local Git commits",
-    "Dependencies installed and lockfile generated",
-    "Full TypeScript typecheck and Vite production build",
-    "Browser-visible Toy Cat rendering",
-    "Hotspot panel, tour activation, reset, zoom and quality controls exercised",
-    "Desktop 1280x800 and portrait 390x844 layout inspected"
+    "GitHub repository created and MIT licence added",
+    "CC0 measuring tape PLY source verified, bundled and recorded with checksum",
+    "CC0 demo rendered in the existing local viewer; zoom and reset verified",
+    "Repository default scene and legacy query updated to use the licensed demo"
   ],
   "pending": [
-    "Download and test explicitly licensed sample",
+    "Confirm the updated main-branch CI checks pass",
+    "Final confirmation immediately before public GitHub/site exposure",
+    "Provision Netlify manual publishing site and configure GitHub publishing credentials",
+    "Run the manual production workflow and verify the public URL and asset fetch",
+    "Check production browser interactions and rollback readiness",
     "Real Pixel 7 capture and performance test",
-    "Approve and create private GitHub repository",
-    "Connect hosting and protected external asset storage",
-    "Enable protected automatic previews",
-    "Approve and verify production deployment",
-    "Verify rollback",
-    "Complete keyboard, touch, fullscreen, failure-path and production-output browser checks"
+    "Keyboard, touch, fullscreen and failure-path checks"
   ],
   "decisions": [
     "Keep PlayCanvas, Vite, TypeScript and SOG",
     "Netlify deployment adapter",
     "CPU conversion default for Apple Silicon portability",
     "Do not silently crop, decimate or remove visible objects",
-    "Never auto-publish on ordinary main commits"
+    "Never auto-publish on ordinary main commits",
+    "Use the verified CC0 measuring tape as the bundled demonstration scene"
   ],
   "knownIssues": [
-    "Toy Cat asset-specific licence unresolved; replace with explicitly licensed sample before publication",
-    "Vite reports 2 MB minified renderer chunk (512 kB gzip)",
     "Real Pixel 7 capture and performance not tested",
-    "External storage, automatic protected previews and hosting not provisioned"
+    "Netlify site and publishing credentials are not provisioned",
+    "Vite reports a 2 MB minified renderer chunk (512 kB gzip)"
   ],
-  "nextAction": "Review local preview; approve GitHub owner/private repository creation. Complete licensed-sample and remaining browser tests before publishing.",
-  "publishingApproval": null,
-  "githubRepository": null,
+  "nextAction": "Verify the updated GitHub Actions checks, prepare manual Netlify publishing, then request final public-release confirmation",
+  "publishingApproval": "Open-source release and deployment authorised; final public-exposure confirmation pending",
+  "githubRepository": "https://github.com/joltstudio/gaussian-splat-studio (currently private)",
   "deploymentUrl": null
 }
