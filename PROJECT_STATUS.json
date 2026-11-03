@@ -7,19 +7,19 @@
     "Primary-source technology review",
     "Modular viewer source and scene validation",
     "Project import, inspection and checkpoint CLI",
-    "13 offline tests and TypeScript/Vite production build passed before release updates",
+    "13 offline tests and production build passed in GitHub Actions at 738c988",
     "Manual-only production publishing workflow",
     "User documentation",
-    "GitHub repository created and MIT licence added",
+    "GitHub repository created, MIT licence added and publisher variable configured",
     "CC0 measuring tape PLY source verified, bundled and recorded with checksum",
     "CC0 demo rendered in the existing local viewer; zoom and reset verified",
     "Repository default scene and legacy query updated to use the licensed demo"
   ],
   "pending": [
-    "Confirm the updated main-branch CI checks pass",
     "Final confirmation immediately before public GitHub/site exposure",
-    "Provision Netlify manual publishing site and configure GitHub publishing credentials",
-    "Run the manual production workflow and verify the public URL and asset fetch",
+    "Create the Netlify site and publish the passing CI artifact",
+    "Configure repeatable GitHub workflow secrets after the Netlify site ID is available",
+    "Verify the public URL and asset fetch in a signed-out browser",
     "Check production browser interactions and rollback readiness",
     "Real Pixel 7 capture and performance test",
     "Keyboard, touch, fullscreen and failure-path checks"
@@ -37,7 +37,7 @@
     "Netlify site and publishing credentials are not provisioned",
     "Vite reports a 2 MB minified renderer chunk (512 kB gzip)"
   ],
-  "nextAction": "Verify the updated GitHub Actions checks, prepare manual Netlify publishing, then request final public-release confirmation",
+  "nextAction": "Await final public-exposure confirmation, then publish the verified artifact to Netlify and make the repository public",
   "publishingApproval": "Open-source release and deployment authorised; final public-exposure confirmation pending",
   "githubRepository": "https://github.com/joltstudio/gaussian-splat-studio (currently private)",
   "deploymentUrl": null
