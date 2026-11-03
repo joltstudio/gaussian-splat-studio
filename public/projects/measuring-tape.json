@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "id": "measuring-tape",
+  "title": "A different perspective.",
+  "subtitle": "A measuring tape captured as a Gaussian splat.",
+  "asset": {
+    "url": "/projects/gsplat-measuring-tape.ply",
+    "rotation": [
+      0,
+      0,
+      0
+    ],
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "credit": "Measuring tape Gaussian splat · CC0 1.0",
+    "licence": "CC0 1.0. Public domain dedication.",
+    "source": "https://www.innerscene.com/tools/library/3d-parts/measuring-tape-ply-9c43edba"
+  },
+  "camera": {
+    "position": [
+      0,
+      0,
+      2.5
+    ],
+    "target": [
+      0,
+      0,
+      0
+    ]
+  },
+  "theme": {
+    "brand": "SPLAT / STUDIO",
+    "accent": "#c8eea0",
+    "background": "#171a19",
+    "font": "Inter, system-ui, sans-serif",
+    "navigation": "bottom"
+  },
+  "hotspots": [],
+  "tour": []
+}
