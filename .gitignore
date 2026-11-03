@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.portable/
+.env*
+!.env.example
+assets-private/
+*.ply
+*.sog
+*.spz
+*.splat
+*.zip
+*.tgz
+.DS_Store
